@@ -58,6 +58,14 @@ function cj_mgj(Nesdata){
     });
 }
 
+
+/**
+ *  DOM 数据处理
+ * @param body
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_mgj.prototype.DomHtml = function(body,obj,callback){
 
     var body  = iconv.decode(new Buffer(body, 'binary'), 'utf8');
@@ -72,9 +80,16 @@ cj_mgj.prototype.DomHtml = function(body,obj,callback){
              callback();
         });
     });
-
 }
 
+
+/**
+ *  Dom 图片下载
+ * @param body
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_mgj.prototype.GetPic = function(body,obj,callback){
       var js_img = body.match(/\{"topImages"\:\[(.*?)\]/)[1];
           js_img = js_img.replace(/(")|(\\)/g,"");
@@ -94,7 +109,14 @@ cj_mgj.prototype.GetPic = function(body,obj,callback){
       }
 }
 
-//图片本地化
+
+/**
+ * 图片本地化
+ * @param tmp
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_mgj.prototype.PicCreate = function(tmp,obj,callback){
     var options = {
         url :tmp,
@@ -115,7 +137,13 @@ cj_mgj.prototype.PicCreate = function(tmp,obj,callback){
     });
 }
 
-//参数,体会
+
+/**
+ * 参数,体会
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_mgj.prototype.Args = function(obj,callback){
     var options = {
         url :'http://shop.mogujie.com/detailinfo/'+obj.pid+'?_ajax=1',

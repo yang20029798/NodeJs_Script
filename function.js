@@ -14,7 +14,10 @@ String.prototype.Trim = function()
 }
 
 
-// 时间格式化  继承Date
+/**
+ * 时间格式化  继承Date
+ * @returns {number}
+ */
 Date.prototype.getmonth = function(){
     var date = new Date();
     var month = date.getMonth()+1;
@@ -58,7 +61,11 @@ Date.prototype.Format = function(fmt)
     return fmt;
 }
 
-
+/**
+ * 函数库
+ *
+ * @constructor
+ */
 function Functions(){
 
     this.getpicdown = function(url, callback){
@@ -76,7 +83,13 @@ function Functions(){
         });
     }
 
-    //同步创建文件
+
+    /**
+     * 同步创建文件
+     * @param dirpath
+     * @param mode
+     * @returns {boolean}
+     */
     this.mkdirsSync = function(dirpath, mode) {
         if (!fs.existsSync(dirpath)) {
             var pathtmp;
@@ -97,7 +110,11 @@ function Functions(){
         return true;
     }
 
-    //本地Mysql连接
+
+    /**
+     * 本地Mysql连接
+     * @constructor
+     */
     this.DbMysql = function(){
         var TEST_DATABASE = 'tbk_m';
         //创建连接
@@ -111,7 +128,13 @@ function Functions(){
         return client;
     }
 
-    //采集入库函数
+
+
+    /**
+     * 采集入库函数
+     * @param obj
+     * @constructor
+     */
     this.CjMysqlIn = function(obj){
         //基本信息入库
         var Myquery = this.DbMysql();
@@ -162,7 +185,11 @@ function Functions(){
         });
     }
 
-    // 获取IP
+
+    /**
+     * 获取IP
+     * @returns {string}
+     */
     this.getIp = function(){
         for(var i in ifaces){
             for(var j in ifaces[i]){
@@ -174,7 +201,12 @@ function Functions(){
         }
     };
 
-    // 获取真实（外网）IP
+
+
+    /**
+     * 获取真实（外网）IP
+     * @returns {*}
+     */
     this.getLocalIP = function(){
         for (var dev in ifaces) {
             if( dev.indexOf('eth') != -1 ){

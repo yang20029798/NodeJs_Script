@@ -65,6 +65,10 @@ function cj_tb(Nesdata){
     });
 }
 
+/**
+ *
+ * DOM 数据处理
+ */
 cj_tb.prototype.DomHtml = function(body,obj,callback){
     var body  = iconv.decode(new Buffer(body, 'binary'), 'gbk');
     var $  = cheerio.load(body);
@@ -87,7 +91,11 @@ cj_tb.prototype.DomHtml = function(body,obj,callback){
 
 }
 
-//价格
+
+/**
+ *
+ * 价格
+ */
 cj_tb.prototype.price = function(obj,callback){
     var options = {
         url : 'https://detailskip.taobao.com/json/sib.htm?itemId='+obj.pid+'&p=1',
@@ -112,7 +120,14 @@ cj_tb.prototype.price = function(obj,callback){
     });
 }
 
-//图片本地化
+
+/**
+ * 图片本地化
+ * @param tmp
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_tb.prototype.PicCreate = function(tmp,obj,callback){
     var options = {
         url : 'http://'+tmp,
@@ -133,6 +148,14 @@ cj_tb.prototype.PicCreate = function(tmp,obj,callback){
     });
 
 }
+
+/**
+ * Dom 图片下载
+ * @param obj
+ * @param $
+ * @param callback
+ * @constructor
+ */
 cj_tb.prototype.GetPic = function(obj,$,callback){
     var Pnum = $('.tb-thumb a img').length;
     var img = [];
@@ -151,7 +174,12 @@ cj_tb.prototype.GetPic = function(obj,$,callback){
     });
 }
 
-//评论
+
+/**
+ * 评论
+ * @param obj
+ * @param callback
+ */
 cj_tb.prototype.rate = function(obj,callback){
     var options = {
         url : 'https://count.taobao.com/counter3?callback=jsonp121&keys=ICE_3_feedcount-'+obj.pid,

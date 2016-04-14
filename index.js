@@ -12,6 +12,10 @@ var tb = require('./caiji/cj_tb.js');
 var jd = require('./caiji/cj_jd.js');
 var mgj = require('./caiji/cj_mgj.js');
 
+/*
+ * 服务器
+ *
+ */
 http.createServer(function (req, res) {
     req.setEncoding('utf-8');
     var postData = ""; //POST & GET ： name=zzl&email=zzl@sina.com
@@ -32,7 +36,12 @@ http.createServer(function (req, res) {
 }).listen(config.listen.prox, config.listen.host);
 console.log('Server running at http://'+config.listen.host+':'+config.listen.prox+'/');
 
-//数据处理
+
+/*
+ * 数据处理
+ * @param data
+ * @constructor
+ */
 var DattaHandle = function(data){
     if((typeof data) == "string" && data !="" ){
         if(typeof JSON.parse(data) == "object")  new Data(data);
@@ -41,7 +50,11 @@ var DattaHandle = function(data){
 }
 
 
-//采集入口
+/**
+ *  采集入口
+ * @param arr
+ * @constructor
+ */
 var Data = function(arr){
     var params  = JSON.parse(arr);
   for(var i in params){
@@ -54,9 +67,12 @@ var Data = function(arr){
 }
 
 
-
+/*
+ * 采集机上报
+ *
+ */
 ipReport();
-//采集机上报
+//上报时间间隔
 var RepotTime  = 1000*1200;
 //console.log(RepotTime);
 setInterval(function(){ipReport()},RepotTime);
@@ -77,7 +93,7 @@ function ipReport(){
             }
             var date = new Date().Format('yyyy-MM-dd hh:mm:ss');
             var prox = config.listen.prox;
-            var localIP = '114.215.155.211';
+            var localIP = '114.215.155.000';
             var version = '10';
             var Myquery = Func.DbMysql();
             var sql = "SELECT * FROM tbk_nodejs WHERE id='1'";

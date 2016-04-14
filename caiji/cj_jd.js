@@ -37,6 +37,7 @@ function cj_jd(Nesdata){
         }
     };
 
+
     http(options, function(err, res, body) {
         obj.jd_self.DomHtml(body,obj,function(){
 
@@ -60,6 +61,13 @@ function cj_jd(Nesdata){
     });
 }
 
+/**
+ * DOM 数据处理
+ * @param body
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_jd.prototype.DomHtml = function(body,obj,callback){
     var body  = iconv.decode(new Buffer(body, 'binary'), 'gbk');
     var $  = cheerio.load(body);
@@ -84,6 +92,14 @@ cj_jd.prototype.DomHtml = function(body,obj,callback){
 
 }
 
+
+/**
+ *  Dom 图片下载
+ * @param obj
+ * @param $
+ * @param callback
+ * @constructor
+ */
 cj_jd.prototype.GetPic = function(obj,$,callback){
     var Pnum = $(".spec-items img").length;
     var img = [];
@@ -100,7 +116,15 @@ cj_jd.prototype.GetPic = function(obj,$,callback){
     });
 }
 
-//图片本地化
+
+
+/**
+ * 图片本地化
+ * @param tmp
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_jd.prototype.PicCreate = function(tmp,obj,callback){
     var options = {
         url : 'http://img11.360buyimg.com/n1/'+tmp,
@@ -121,7 +145,13 @@ cj_jd.prototype.PicCreate = function(tmp,obj,callback){
     });
 }
 
-//价格
+
+/**
+ * 价格
+ * @param obj
+ * @param callback
+ * @constructor
+ */
 cj_jd.prototype.Price = function(obj,callback){
     var options = {
         url : 'http://p.3.cn/prices/get?skuid=J_'+obj.pid,
@@ -135,7 +165,14 @@ cj_jd.prototype.Price = function(obj,callback){
             callback();
     });
 }
-//评论
+
+
+
+/**
+ * 评论
+ * @param obj
+ * @param callback
+ */
 cj_jd.prototype.rate = function(obj,callback){
     var options = {
         url : 'http://club.jd.com/clubservice.aspx?method=GetCommentsCount&referenceIds='+obj.pid,
